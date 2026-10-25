@@ -1,0 +1,1333 @@
+* {
+    box-sizing: border-box
+}
+
+:root {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0;
+    background: #171619;
+    color: #f6edf0;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.55
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+button,
+input,
+textarea {
+    font: inherit
+}
+
+button {
+    color: inherit;
+    cursor: pointer
+}
+
+.topbar {
+    min-height: 54px;
+    padding: 0 4.3%;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    background: #191719;
+    border-bottom: 1px solid #3b3036;
+    position: sticky;
+    top: 0;
+    z-index: 10
+}
+
+.brand {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 23px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 13px
+}
+
+.brand-heart {
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    color: #e9a7b6;
+    line-height: 1
+}
+
+.topbar nav {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+    font-size: 12px;
+    color: #d6c5cb
+}
+
+.topbar nav a {
+    transition: color .25s
+}
+
+.topbar nav a:hover {
+    color: #f0a8b8
+}
+
+.top-heart {
+    color: #e8a5b4;
+    font-size: 19px;
+    margin-left: 3%
+}
+
+.hero {
+    height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 30px 4.3%;
+    overflow: hidden;
+    background-image: linear-gradient(34deg, #14101399, #1b111733, #140d11aa), url("images/fon.jpg"), url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=85");
+    background-size: cover;
+    background-position: center 47%
+}
+
+.hero-shade,
+.timer-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20, 16, 19, .45), rgba(27, 17, 23, .12) 60%, rgba(20, 13, 17, .4))
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 1;
+    animation: rise .8s ease both
+}
+
+.eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: #e8a7b5;
+    margin: 0 0 8px
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0
+}
+
+h1 {
+    font: 500 43px/.98 "Cormorant Garamond", Georgia, serif;
+    margin: 0 0 14px;
+    color: #f8e9ed
+}
+
+.hero-copy>p:last-child {
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+    color: #f3e9ed
+}
+
+.handwriting {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: #f2c3cd;
+    transform: rotate(-10deg);
+    line-height: 1.2
+}
+
+.hero-note {
+    position: absolute;
+    right: 17%;
+    top: 28px;
+    font-size: 19px;
+    opacity: .85
+}
+
+.scroll-cue {
+    position: absolute;
+    bottom: 13px;
+    right: 4.5%;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #f1dce2;
+    opacity: .8
+}
+
+.scroll-cue span {
+    padding-left: 7px
+}
+
+.section {
+    padding: 22px 4.4% 24px;
+    border-bottom: 1px solid #282529
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 13px
+}
+
+.section h2,
+.confirm-panel h2 {
+    font: 500 25px/1.1 "Cormorant Garamond", Georgia, serif;
+    margin: 0 0 3px
+}
+
+.section-heading p,
+.confirm-panel>p {
+    color: #bcb4bd;
+    margin: 0;
+    font-size: 12px
+}
+
+.step-count {
+    color: #dca0b0;
+    font-size: 11px
+}
+
+.places-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px
+}
+
+.place-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    overflow: hidden;
+    border: 1px solid #65515d;
+    border-radius: 10px;
+    background: #1b1a1e;
+    padding: 0;
+    min-width: 0;
+    transition: transform .25s, border-color .25s, box-shadow .25s
+}
+
+.place-card:hover {
+    transform: translateY(-4px);
+    border-color: #e8a6b6;
+    box-shadow: 0 10px 28px #0004
+}
+
+.place-card.selected {
+    border: 2px solid #e8a6b6;
+    box-shadow: 0 0 0 2px #e8a6b622
+}
+
+.place-photo {
+    height: 128px;
+    width: 100%;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    transition: transform .5s
+}
+
+.place-card:hover .place-photo {
+    transform: scale(1.04)
+}
+
+.photo-oranj {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card1.jpg"), url("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-ost {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card2.jpg"), url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-ganch {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card3.jpg"), url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-foto {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card4.jpg"), url("https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-home {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card5.jpg"), url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-book {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card6.jpg"), url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80")
+}
+
+.photo-len {
+    background-image: linear-gradient(#17111900, #17111944), url("images/card7.jpg"), url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80")
+}
+
+.radio-mark {
+    position: absolute;
+    right: 9px;
+    top: 9px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #f4dce4;
+    border-radius: 50%;
+    background: #1b1a1e55
+}
+
+.selected .radio-mark {
+    background: #e8a6b6;
+    border-color: #e8a6b6
+}
+
+.selected .radio-mark:after {
+    content: "✓";
+    position: absolute;
+    inset: -2px 0 0;
+    text-align: center;
+    color: #21171c;
+    font-size: 12px;
+    font-weight: bold
+}
+
+.place-info {
+    padding: 8px 11px 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 67px
+}
+
+.place-info strong {
+    font: 500 16px "Cormorant Garamond", Georgia, serif
+}
+
+.place-info small {
+    font-size: 10px;
+    color: #c5bdc5;
+    line-height: 1.45
+}
+
+.custom-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    min-height: 195px;
+    padding: 10px
+}
+
+.custom-card .plus {
+    font-size: 34px;
+    font-weight: 200;
+    color: #e9b5c1;
+    line-height: 1
+}
+
+.custom-card strong {
+    font-size: 11px;
+    font-weight: 500
+}
+
+.custom-heart {
+    font-size: 18px;
+    color: #e8a6b6
+}
+
+.tiny-note {
+    font-size: 9px;
+    color: #827b84;
+    margin: 10px 0 0
+}
+
+.schedule-section {
+    padding-top: 23px;
+    padding-bottom: 22px
+}
+
+.planner-grid {
+    display: grid;
+    grid-template-columns: 1.04fr 1fr 1.04fr;
+    gap: 16px
+}
+
+.panel {
+    border: 1px solid #39353d;
+    border-radius: 12px;
+    padding: 13px 15px;
+    background: linear-gradient(145deg, #1c1b20, #171619);
+    min-width: 0
+}
+
+.panel-title {
+    margin-bottom: 12px
+}
+
+.panel-title h3 {
+    font: 500 20px "Cormorant Garamond", Georgia, serif;
+    margin: 0
+}
+
+.calendar-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.calendar-title button {
+    border: 0;
+    background: none;
+    font-size: 26px;
+    color: #e9b1bf;
+    padding: 0 4px;
+    line-height: 1
+}
+
+.weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    text-align: center
+}
+
+.weekdays {
+    font-size: 10px;
+    color: #c1b8c2;
+    margin: 8px 0 6px
+}
+
+.calendar-days {
+    gap: 4px 2px
+}
+
+.day {
+    height: 29px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #e7dfe6;
+    font-size: 11px;
+    position: relative;
+    transition: background .2s, transform .2s
+}
+
+.day:not(:disabled):hover {
+    background: #4a3541;
+    transform: scale(1.08)
+}
+
+.day:disabled {
+    color: #6c6670;
+    cursor: not-allowed
+}
+
+.day.free:after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    bottom: 2px;
+    left: calc(50% - 2px);
+    border-radius: 50%;
+    background: #e5a3b4
+}
+
+.day.busy {
+    text-decoration: line-through;
+    opacity: .48
+}
+
+.day.selected {
+    background: #e9a8b7;
+    color: #24191e;
+    font-weight: 700
+}
+
+.day.today {
+    outline: 1px solid #e9a8b7
+}
+
+.calendar-hint {
+    font-size: 9px;
+    color: #aaa1ab;
+    margin: 12px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.free-dot {
+    background: #e5a3b4;
+    margin-left: 3px
+}
+
+.busy-dot {
+    background: #766d78;
+    margin-left: 7px
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.schedule-row {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 7px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    color: #e5dce4
+}
+
+.schedule-row .dayname {
+    color: #a9a0aa
+}
+
+.schedule-row .status {
+    color: #c9c0c9
+}
+
+.schedule-row.free .status:after {
+    content: "✓";
+    font-size: 14px;
+    color: #e7b0bd;
+    margin-left: 9px
+}
+
+.schedule-row.busy {
+    opacity: .4
+}
+
+.schedule-row.active {
+    background: #e6a4b4;
+    color: #27191f
+}
+
+.schedule-row.active .dayname,
+.schedule-row.active .status {
+    color: #39232b
+}
+
+.schedule-foot {
+    font-size: 9px;
+    color: #8f8791;
+    margin: 10px 0 0
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 2px 0 13px;
+    border-bottom: 1px solid #39343c
+}
+
+#weatherIcon {
+    font-size: 38px
+}
+
+.weather-main>div {
+    display: flex;
+    flex-direction: column
+}
+
+.weather-main strong {
+    font: 500 31px "Cormorant Garamond", Georgia, serif;
+    line-height: 1.1
+}
+
+.weather-main small {
+    font-size: 10px;
+    color: #c5bdc7
+}
+
+.weather-details {
+    display: grid;
+    gap: 4px;
+    padding: 9px 0 11px;
+    border-bottom: 1px solid #39343c;
+    font-size: 10px;
+    color: #c6bdc7
+}
+
+.weather-details span {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px
+}
+
+.weather-details b {
+    font-weight: 500;
+    color: #e6dce4
+}
+
+.forecast {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 10px
+}
+
+.forecast div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+    border-right: 1px solid #39343c
+}
+
+.forecast div:last-child {
+    border: 0
+}
+
+.forecast small {
+    font-size: 9px;
+    color: #c7bdc7
+}
+
+.forecast span {
+    font-size: 16px
+}
+
+.forecast b {
+    font-size: 10px;
+    font-weight: 500
+}
+
+.weather-note {
+    font-size: 9px;
+    color: #8f8791;
+    margin: 10px 0 0
+}
+
+.comment-section {
+    padding-top: 22px;
+    padding-bottom: 17px;
+    border-bottom: 0
+}
+
+.comment-box {
+    margin-top: 14px;
+    border: 1px solid #49414a;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    gap: 10px;
+    transition: border-color .2s
+}
+
+.comment-box:focus-within {
+    border-color: #e5a4b4
+}
+
+.comment-box textarea {
+    background: transparent;
+    color: #f6edf0;
+    resize: vertical;
+    min-height: 36px;
+    max-height: 130px;
+    border: 0;
+    outline: 0;
+    flex: 1;
+    font-size: 12px
+}
+
+.comment-box textarea::placeholder {
+    color: #a39aa5
+}
+
+.comment-box span {
+    font-size: 22px;
+    color: #e7a4b5
+}
+
+.confirm-panel {
+    margin-top: 20px;
+    border: 1px solid #403840;
+    border-radius: 13px;
+    padding: 16px 20px
+}
+
+.confirm-panel h2 {
+    font-size: 25px
+}
+
+.add-date-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px
+}
+
+.add-date-row>span {
+    font-size: 11px;
+    color: #b9adb9
+}
+
+.confirm-content {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr 1fr auto;
+    align-items: center;
+    gap: 15px;
+    margin-top: 16px
+}
+
+.summary-place,
+.summary-date,
+.summary-comment {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    min-height: 75px;
+    border-right: 1px solid #413942;
+    padding-right: 12px
+}
+
+.summary-thumb {
+    width: 72px;
+    height: 82px;
+    border-radius: 9px;
+    background: #30232b center/cover;
+    flex-shrink: 0
+}
+
+.summary-place>div:nth-child(2),
+.summary-date>div,
+.summary-comment>div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0
+}
+
+.summary-place small,
+.summary-date small,
+.summary-comment small {
+    font-size: 10px;
+    color: #c4b5be
+}
+
+.summary-place strong,
+.summary-date strong {
+    font-size: 12px;
+    font-weight: 500;
+    overflow-wrap: anywhere
+}
+
+.summary-place>span {
+    color: #e9a5b5
+}
+
+.summary-icon {
+    font-size: 23px;
+    color: #e9a5b5;
+    align-self: flex-start
+}
+
+.summary-comment p {
+    font-size: 10px;
+    color: #bdb2bd;
+    margin: 0;
+    overflow-wrap: anywhere
+}
+
+.confirm-button {
+    border: 0;
+    border-radius: 30px;
+    background: #e8a7b7;
+    color: #2a1b21;
+    padding: 13px 21px;
+    white-space: nowrap;
+    font-size: 12px;
+    transition: transform .2s, background .2s
+}
+
+.confirm-button:hover {
+    background: #f3bdca;
+    transform: translateY(-2px)
+}
+
+.confirm-button span {
+    font-size: 16px;
+    margin-left: 10px
+}
+
+.form-message {
+    font-size: 11px;
+    color: #eab2bf;
+    margin: 10px 0 0;
+    min-height: 0
+}
+
+.planned-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px
+}
+
+.planned-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #49414a;
+    border-radius: 10px;
+    background: #211d23;
+    animation: rise .25s ease both
+}
+
+.planned-date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0
+}
+
+.planned-date-info strong {
+    font-weight: 600;
+    font-size: 12px
+}
+
+.planned-date-info small {
+    color: #bcb0bc;
+    font-size: 10px;
+    overflow-wrap: anywhere
+}
+
+.planned-date button {
+    background: transparent;
+    border: 1px solid #e8a7b7;
+    color: #e8a7b7;
+    border-radius: 20px;
+    padding: 7px 12px;
+    font-size: 11px;
+    flex-shrink: 0
+}
+
+.timer-section {
+    position: relative;
+    min-height: 164px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: linear-gradient(#e9aeb944, #f8d0d577), url("images/timer.jpg"), url("https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1800&q=85");
+    background-position: center 55%;
+    background-size: cover
+}
+
+.timer-overlay {
+    background: linear-gradient(90deg, rgba(233, 174, 185, .2), rgba(248, 208, 213, .38), rgba(233, 174, 185, .2))
+}
+
+.timer-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 10px
+}
+
+.timer-heart {
+    color: #fff3f5;
+    font-size: 17px;
+    display: block
+}
+
+.timer-content h2 {
+    font: 500 24px "Cormorant Garamond", Georgia, serif;
+    color: #2c1c24;
+    margin: 0 0 8px
+}
+
+.timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 13px
+}
+
+.timer-grid div {
+    width: 88px;
+    min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #3a29325e;
+    color: #fff4f6;
+    padding: 5px
+}
+
+.timer-grid strong {
+    font: 500 32px "Cormorant Garamond", Georgia, serif;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums
+}
+
+.timer-grid span {
+    font-size: 9px
+}
+
+.timer-content>p {
+    font-size: 10px;
+    color: #2f1f27;
+    margin: 13px 0 0
+}
+
+.timer-note {
+    position: absolute;
+    right: 8%;
+    top: 33px;
+    color: #f9e7eb;
+    font-size: 18px;
+    z-index: 1
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 4.5%;
+    font-size: 10px;
+    color: #8f8590;
+    background: #171619
+}
+
+dialog {
+    background: #211d23;
+    color: #f8edf1;
+    border: 1px solid #6c515f;
+    border-radius: 16px;
+    width: min(420px, calc(100% - 30px));
+    padding: 0;
+    box-shadow: 0 25px 90px #0009
+}
+
+dialog::backdrop {
+    background: #09070bbd;
+    backdrop-filter: blur(5px)
+}
+
+dialog form {
+    padding: 28px;
+    position: relative
+}
+
+dialog h2 {
+    font: 500 30px "Cormorant Garamond", serif;
+    margin: 0 0 8px
+}
+
+dialog p:not(.eyebrow) {
+    color: #bfb4bf;
+    font-size: 12px
+}
+
+dialog input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #584652;
+    border-radius: 9px;
+    background: #171619;
+    color: #fff;
+    margin: 10px 0 15px;
+    outline: 0
+}
+
+.dialog-close {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    background: none;
+    border: 0;
+    font-size: 25px;
+    color: #d7a0ae
+}
+
+.dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.cancel-button {
+    border: 1px solid #65515d;
+    border-radius: 30px;
+    background: transparent;
+    color: #e8cbd4;
+    padding: 12px 16px;
+    font-size: 12px
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(15px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@media(max-width:1050px) {
+    .places-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
+
+    .place-photo {
+        height: 150px
+    }
+
+    .custom-card {
+        min-height: 218px
+    }
+
+    .confirm-content {
+        grid-template-columns: 1fr 1fr
+    }
+
+    .summary-comment {
+        border-right: 0
+    }
+
+    .confirm-button {
+        justify-self: start
+    }
+
+    .planner-grid {
+        grid-template-columns: 1fr 1fr
+    }
+
+    .weather-panel {
+        grid-column: 1/-1
+    }
+
+    .weather-details {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+@media(max-width:650px) {
+    body {
+        font-size: 13px
+    }
+
+    .topbar {
+        min-height: 54px;
+        padding: 7px 12px;
+        gap: 8px
+    }
+
+    .brand {
+        font-size: 18px;
+        gap: 5px
+    }
+
+    .brand-heart {
+        font-size: 27px
+    }
+
+    .topbar nav {
+        display: flex;
+        gap: clamp(7px, 2.2vw, 12px);
+        font-size: clamp(9px, 2.5vw, 10px);
+        margin-left: auto;
+        white-space: nowrap
+    }
+
+    .topbar nav a:nth-child(2) {
+        display: inline
+    }
+
+    .top-heart {
+        display: none
+    }
+
+    .hero {
+        height: 290px;
+        padding: 26px 22px;
+        background-position: 57% center;
+        align-items: flex-start
+    }
+
+    .hero-copy {
+        margin-top: 15px
+    }
+
+    .eyebrow {
+        font-size: 8px
+    }
+
+    h1 {
+        font-size: 37px
+    }
+
+    .hero-copy>p:last-child {
+        font-size: 11px;
+        max-width: 290px
+    }
+
+    .desktop-only {
+        display: none
+    }
+
+    .hero-note {
+        right: 7%;
+        top: auto;
+        bottom: 38px;
+        font-size: 16px
+    }
+
+    .scroll-cue {
+        right: 22px;
+        bottom: 12px
+    }
+
+    .section {
+        padding: 22px 17px
+    }
+
+    .section h2,
+    .confirm-panel h2 {
+        font-size: 24px
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    .step-count {
+        display: none
+    }
+
+    .places-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px
+    }
+
+    .place-photo {
+        height: 125px
+    }
+
+    .place-info {
+        padding: 8px;
+        min-height: 66px
+    }
+
+    .place-info strong {
+        font-size: 16px
+    }
+
+    .place-info small {
+        font-size: 9px
+    }
+
+    .custom-card {
+        min-height: 200px
+    }
+
+    .planner-grid {
+        grid-template-columns: 1fr;
+        gap: 12px
+    }
+
+    .weather-panel {
+        grid-column: auto
+    }
+
+    .panel {
+        padding: 15px
+    }
+
+    .calendar-days {
+        gap: 5px 3px
+    }
+
+    .day {
+        height: 35px;
+        font-size: 12px
+    }
+
+    .schedule-row {
+        padding: 8px 9px
+    }
+
+    .weather-details {
+        grid-template-columns: 1fr
+    }
+
+    .weather-details span {
+        max-width: 240px
+    }
+
+    .forecast {
+        padding-bottom: 3px
+    }
+
+    .comment-section {
+        padding-top: 22px
+    }
+
+    .comment-box {
+        padding: 10px
+    }
+
+    .confirm-panel {
+        padding: 15px 13px;
+        margin-top: 15px
+    }
+
+    .add-date-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px
+    }
+
+    .confirm-content {
+        grid-template-columns: 1fr;
+        gap: 10px
+    }
+
+    .summary-place,
+    .summary-date,
+    .summary-comment {
+        border-right: 0;
+        border-bottom: 1px solid #413942;
+        padding: 0 0 11px;
+        min-height: 65px
+    }
+
+    .summary-thumb {
+        width: 62px;
+        height: 65px
+    }
+
+    .summary-icon {
+        width: 25px
+    }
+
+    .confirm-button {
+        width: 100%;
+        justify-self: stretch
+    }
+
+    .planned-date {
+        align-items: flex-start;
+        flex-direction: column
+    }
+
+    .planned-date button {
+        width: 100%
+    }
+
+    .timer-section {
+        min-height: 220px;
+        background-position: center
+    }
+
+    .timer-note {
+        right: 5%;
+        top: 13px;
+        font-size: 14px
+    }
+
+    .timer-content {
+        padding: 30px 8px 22px
+    }
+
+    .timer-content h2 {
+        font-size: 24px
+    }
+
+    .timer-grid {
+        gap: 6px
+    }
+
+    .timer-grid div {
+        width: clamp(61px, 21vw, 82px);
+        min-height: 66px;
+        padding: 4px 2px
+    }
+
+    .timer-grid strong {
+        font-size: 29px
+    }
+
+    .timer-grid span {
+        font-size: 8px
+    }
+
+    .timer-content>p {
+        margin-top: 12px
+    }
+
+    footer {
+        padding: 14px 17px;
+        font-size: 9px
+    }
+}
+
+@media(max-width:370px) {
+    .topbar {
+        gap: 5px
+    }
+
+    .brand {
+        font-size: 16px
+    }
+
+    .topbar nav {
+        gap: 6px;
+        font-size: 8px
+    }
+
+    .brand-heart {
+        font-size: 23px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important
+    }
+}

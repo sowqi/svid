@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171619">
+  <title>Наши планы ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="brand-heart">♡</span> Наши планы</a>
+  <nav aria-label="Основная навигация">
+    <a href="#places">Места</a><a href="#schedule">График</a><a href="#choice">Выбор</a><a href="#timer">Таймер</a>
+  </nav>
+  <span class="top-heart">♥</span>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-shade"></div>
+    <div class="hero-copy reveal">
+      <p class="eyebrow">ТОЛЬКО ДЛЯ НАС ДВОИХ</p>
+      <h1>Мои мечты<br>о наших встречах</h1>
+      <p>Здесь я собрала места, где хочу побывать с тобой.<br class="desktop-only"> Выбери то, что тебе нравится, и давай сделаем это<br class="desktop-only"> реальностью ♡</p>
+    </div>
+    <a class="scroll-cue" href="#places">листай ниже <span>↓</span></a>
+  </section>
+
+  <section class="section places-section reveal" id="places">
+    <div class="section-heading">
+      <div><h2>1. Выбери место</h2><p>Один из этих вариантов… или предложи свой ♡</p></div>
+      <span class="step-count" id="placeCount">0 / 1 выбрано</span>
+    </div>
+    <div class="places-grid" id="placesGrid">
+      <button type="button" class="place-card" data-place="Крытая оранжерея" data-description="Прогулки среди растений" data-image="card1.jpg">
+        <span class="place-photo photo-oranj"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Крытая оранжерея</strong><small>Прогулки среди растений</small></span>
+      </button>
+      <button type="button" class="place-card" data-place="Остановка у финки" data-description="📍Набережная Миклухо-Маклая" data-image="sea.jpg">
+        <span class="place-photo photo-ost"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Остановка у финки</strong><small>📍Набережная <br>Миклухо-Маклая</small></span>
+      </button>
+      <button type="button" class="place-card" data-place="Гончарная мастерская" data-image="mountains.jpg">
+        <span class="place-photo photo-ganch"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Гончарная мастерская</strong></span>
+      </button>
+      <button type="button" class="place-card" data-place="Фотобудка" data-description= "Милые фото и из различных мемов" data-image="petersburg.jpg">
+        <span class="place-photo photo-foto"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Фотобудка</strong><small>Милые фото и<br>из различных мемов</small></span>
+      </button>
+      <button type="button" class="place-card" data-place="Имбирные пряники" data-description="Приготовить вместе дома" data-image="home.jpg">
+        <span class="place-photo photo-home"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Имбирные пряники</strong><small>Приготовить вместе дома</small></span>
+      </button>
+      <button type="button" class="place-card" data-place="Большой зал книг (академия)" data-description="📍Литейный проспект, 57" data-image="home.jpg">
+        <span class="place-photo photo-book"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Большой зал книг (академия)</strong><small>📍Литейный проспект, 57</small></span>
+      </button>
+      <button type="button" class="place-card" data-place="Ленинградские пышки" data-description="📍Большая конюшенная, 25" data-image="home.jpg">
+        <span class="place-photo photo-len"></span><span class="radio-mark"></span>
+        <span class="place-info"><strong>Ленинградские пышки</strong><small>📍Большая конюшенная, 25</small></span>
+      </button>
+      <button type="button" class="place-card custom-card" id="customPlaceBtn">
+        <span class="plus">＋</span><strong>Предложить<br>свой вариант</strong><span class="custom-heart">♡</span>
+      </button>
+    </div>
+    <p class="tiny-note">Выбирай место и свободную дату — можно запланировать несколько свиданий ♡</p>
+  </section>
+
+  <section class="section schedule-section reveal" id="schedule">
+    <div class="section-heading"><div><h2>2. Выбери дату</h2><p>Смотри мой график и выбирай удобный день ♡</p></div></div>
+    <div class="planner-grid">
+      <div class="panel calendar-panel">
+        <div class="panel-title calendar-title"><button type="button" id="prevMonth" aria-label="Предыдущий месяц">‹</button><h3 id="monthLabel">Октябрь 2026</h3><button type="button" id="nextMonth" aria-label="Следующий месяц">›</button></div>
+        <div class="weekdays"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+        <div class="calendar-days" id="calendarDays"></div>
+        <p class="calendar-hint"><span class="dot free-dot"></span> свободно <span class="dot busy-dot"></span> занято</p>
+      </div>
+      <div class="panel schedule-panel">
+        <div class="panel-title"><h3>Мой график</h3></div>
+        <div class="schedule-list" id="scheduleList"></div>
+        <p class="schedule-foot">Выбирай день, отмеченный как свободный ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section comment-section reveal" id="choice">
+    <div class="section-heading"><div><h2>3. Добавь комментарий</h2><p>Напиши пожелание или просто что-то приятное ♡</p></div></div>
+    <label class="comment-box"><textarea id="commentInput" rows="2" placeholder="Написать комментарий..."></textarea><span>♡</span></label>
+    <div class="confirm-panel">
+      <h2>Наши планы</h2>
+      <p>Добавь одно или несколько свиданий, затем подтверди весь список.</p>
+      <div class="add-date-row"><button type="button" id="addDateBtn" class="confirm-button">Добавить свидание +</button><span id="placeCountSmall">Пока 0 свиданий</span></div>
+      <div id="plannedDates" class="planned-dates"></div>
+      <div class="confirm-content">
+        <div class="summary-place"><div id="summaryThumb" class="summary-thumb"></div><div><small>Выбранное место</small><strong id="summaryPlace">Пока не выбрано</strong></div><span>♥</span></div>
+        <div class="summary-date"><span class="summary-icon">▦</span><div><small>Выбранная дата</small><strong id="summaryDate">Выбери свободный день</strong><small id="summaryWeekday"></small></div></div>
+        <div class="summary-comment"><span class="summary-icon">▢</span><div><small>Комментарий</small><p id="summaryComment">Тут появится твоё пожелание ♡</p></div></div>
+        <button type="button" id="confirmBtn" class="confirm-button">Подтвердить всё <span>♡</span></button>
+      </div>
+      <p class="form-message" id="formMessage" role="status"></p>
+    </div>
+  </section>
+
+  <section class="timer-section" id="timer">
+    <div class="timer-overlay"></div>
+    <div class="timer-content">
+      <span class="timer-heart">♥</span><h2>До вашего свидания:</h2>
+      <div class="timer-grid"><div><strong id="days">00</strong><span>дней</span></div><div><strong id="hours">00</strong><span>часов</span></div><div><strong id="minutes">00</strong><span>минут</span></div><div><strong id="milliseconds">000</strong><span>миллисекунд</span></div></div>
+      <p id="timerMessage">Я уже очень жду ♡</p>
+    </div>
+    <p class="handwriting timer-note">Скоро мы будем<br>вместе ♡</p>
+  </section>
+</main>
+<footer><span>Сделано с любовью ♡</span><span>Только для нас двоих</span></footer>
+
+<dialog id="customDialog">
+  <form id="customForm">
+    <button type="button" class="dialog-close" id="closeCustomDialog" aria-label="Закрыть окно">×</button>
+    <p class="eyebrow">ВАША ИСТОРИЯ</p><h2>Куда отправимся?</h2>
+    <p>Добавь место, которое хочется посетить вместе.</p>
+    <input id="customPlaceInput" maxlength="60" placeholder="Например, уютная кофейня" required>
+    <div class="dialog-actions"><button type="button" class="cancel-button" id="cancelCustomDialog">Передумал</button><button type="submit" class="confirm-button">Добавить место ♡</button></div>
+  </form>
+</dialog>
+
+<form id="fsForm" action="https://formspree.io/f/https://formspree.io/f/xeaaeevz" method="POST" style="display:none;">
+  <input type="text" name="Имя" id="fsName">
+  <input type="text" name="Место" id="fsPlace">
+  <input type="text" name="Дата" id="fsDate">
+  <textarea name="Комментарий" id="fsComment"></textarea>
+  <input type="text" name="Все свидания" id="fsAllDates">
+</form>
+<script src="script.js"></script>
+</body>
+</html>
