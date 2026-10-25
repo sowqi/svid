@@ -77,7 +77,7 @@ function renderCalendar(){
     if(key===iso(new Date()))btn.classList.add("today");
     btn.textContent=n;btn.disabled=busy||past;
     btn.setAttribute("aria-label",`${n} ${monthNames[date.getMonth()]}, ${busy?"занято":past?"прошедшая дата":"свободно"}`);
-    btn.addEventListener("click",()=>{selectedDate=key;renderCalendar();updateSummary();updateWeather();});
+       btn.addEventListener("click",()=>{selectedDate=key;renderCalendar();updateSummary();});
     calendarDays.appendChild(btn);
   }
   let start=selectedDate?parseDate(selectedDate):new Date(Math.max(Date.now(),new Date(currentMonth.getFullYear(),currentMonth.getMonth(),1).getTime()));
@@ -89,7 +89,7 @@ function renderCalendar(){
     row.className="schedule-row "+(busy||past?"busy":"free")+(selectedDate===key?" active":"");
     row.disabled=busy||past;
     row.innerHTML=`<span class="dayname">${weekNames[date.getDay()].replace(/^./,x=>x.toUpperCase())}</span><span>${String(date.getDate()).padStart(2,"0")}.${String(date.getMonth()+1).padStart(2,"0")}</span><span class="status">${busy?"Занята":past?"Прошло":"Свободна"}</span>`;
-    row.addEventListener("click",()=>{selectedDate=key;renderCalendar();updateSummary();updateWeather();});
+    row.addEventListener("click",()=>{selectedDate=key;renderCalendar();updateSummary();});
     scheduleList.appendChild(row);cursor.setDate(cursor.getDate()+1);shown++;
   }
 }
@@ -154,7 +154,7 @@ document.getElementById("addDateBtn").addEventListener("click",()=>{
   currentMonth=new Date(currentMonth.getFullYear(),currentMonth.getMonth(),1);
   updateSummary();renderCalendar();
 });
-document.getElementById("confirmBtn").addEventListener("click",async ()=>{
+document.getElementById("confirmBtn").addEventListener("click", async ()=>{
   const message=document.getElementById("formMessage");
   if(!plannedDates.length){message.textContent="Сначала добавь хотя бы одно свидание ♡";return;}
   const now=Date.now();
@@ -163,29 +163,33 @@ document.getElementById("confirmBtn").addEventListener("click",async ()=>{
   try{localStorage.setItem("nashiPlanyConfirmed","true");savePlannedDates();}catch(e){}
 
   // === ОТПРАВКА В FORMSPREE ===
-  const fsForm = document.getElementById("fsForm");
-  if (fsForm) {
-    const allDatesText = plannedDates.map(item=>{
-      const d = parseDate(item.date);
-      const dateStr = d.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});
-      return `${item.place} — ${dateStr}${item.comment ? " ("+item.comment+")" : ""}`;
-    }).join("\n");
+  message.textContent = "Отправляем...";
+  
+  const allDatesText = plannedDates.map(item=>{
+    const d = parseDate(item.date);
+    const dateStr = d.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});
+    return `${item.place} — ${dateStr}${item.comment ? " ("+item.comment+")" : ""}`;
+  }).join("\n");
 
-    fsForm.querySelector('[name="Место"]').value = plannedDates.map(i=>i.place).join(", ");
-    fsForm.querySelector('[name="Дата"]').value = plannedDates.map(i=>i.date).join(", ");
-    fsForm.querySelector('[name="Комментарий"]').value = document.getElementById("commentInput").value.trim();
-    fsForm.querySelector('[name="Все свидания"]').value = allDatesText;
-
-    try {
-      const res = await fetch(fsForm.action, {
-        method: "POST",
-        body: new FormData(fsForm),
-        headers: { "Accept": "application/json" }
-      });
-      if (!res.ok) console.warn("Formspree ответил ошибкой:", res.status);
-    } catch (err) {
-      console.warn("Не удалось отправить в Formspree:", err);
-    }
+  try {
+    const res = await fetch("https://formspree.io/f/xeaaeevz", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        "Место": plannedDates.map(i=>i.place).join(", "),
+        "Дата": plannedDates.map(i=>i.date).join(", "),
+        "Комментарий": document.getElementById("commentInput").value.trim(),
+        "Все свидания": allDatesText
+      })
+    });
+    
+    if (!res.ok) throw new Error("Ошибка");
+    console.log("Успешно отправлено в Formspree!");
+  } catch (err) {
+    console.error("Не удалось отправить в Formspree:", err);
   }
   // === КОНЕЦ ОТПРАВКИ ===
 
